@@ -1,12 +1,12 @@
 package com.example.xydt;
 
-public class Point {
+public class Point extends android.graphics.Point {
     public double latitude;
     public double longitude;
     public String name;
     public int index;
 
-    public Point(){
+    public Point(double latitude, double v){
 
     }
 

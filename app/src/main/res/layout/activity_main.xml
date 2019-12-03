@@ -1,15 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".MainActivity">
 
+<!--    <com.getbase.floatingactionbutton.FloatingActionButton-->
+<!--        android:id="@+id/action_a"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        app:fab_colorNormal="@color/white"-->
+<!--        app:fab_title="按钮一"-->
+<!--        app:fab_colorPressed="@color/white_pressed"/>-->
+
+<!--    <com.getbase.floatingactionbutton.FloatingActionButton-->
+<!--        android:id="@+id/action_b"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        app:fab_colorNormal="@color/white"-->
+<!--        app:fab_title="按钮二"-->
+<!--        app:fab_colorPressed="@color/white_pressed"/>-->
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <Button
+            android:id="@+id/button_1"
+            android:text="路线规划"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:ignore="MissingConstraints" />
+        <Button
+            android:id="@+id/button_2"
+            android:text="景点介绍"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:ignore="MissingConstraints" />
+    </LinearLayout>
     <com.baidu.mapapi.map.MapView
         android:id="@+id/bmapView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:clickable="true" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

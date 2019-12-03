@@ -4,6 +4,8 @@ package com.example.xydt;
 //import com.amap.api.maps.model.LatLng;
 import android.util.Log;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.baidu.mapapi.model.LatLng;
 import com.baidu.mapapi.utils.DistanceUtil;
 
@@ -11,10 +13,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
-public class MyGraph{
+public class MyGraph extends AppCompatActivity {
     public  static Point[] points=new Point[]{
             new Point(0,0,"目前位置",9999),//0
-            //主节点45.7134730000  126.6309890000
+            //主节点45.7134730000  126.6309890000 45.7134730000,126.6309890000,45.7127250000,126.6310520000  126.626221,45.714024
+
+
 
             new Point(45.7134730000,126.6309890000,"四号楼",0),//0
             new Point(45.7127250000,126.6310520000,"三号楼",1),//1
@@ -28,7 +32,7 @@ public class MyGraph{
             /*
             2018.12.06新增景点
              */
-            new Point(45.7152630000,126.6259250000,"体育场",210),
+            new Point(45.7152630000,126.6259250000,"体育场",210),//126.621123,45.714254
             new Point(45.7148190000,126.6249960000,"老图书馆",205),
             new Point(45.7161280000,126.6230600000,"A区游泳馆",213),
             new Point(45.7145360000,126.6226560000,"二号楼",203),
@@ -167,8 +171,13 @@ public class MyGraph{
             new Point(45.7128050000,126.6248830000,"B",5008),
             new Point(45.7124910000,126.6249510000,"B",5007),
 
+
+
+
     };
     public  static Edge[] edges=new Edge[]{
+
+
             new Edge(0,3000,10,0),
             new Edge(1,3001,10,1),
             new Edge(3000,3002,10,2),
@@ -332,21 +341,21 @@ public class MyGraph{
 
 
     };
-    public static double[] distance=new double[edges.length];
+    public  double[] distance=new double[edges.length];
     public  List<Point> point=new ArrayList<Point>();
 
-    public void getEdgeDistance(){
-        double Distance=0;
-        for(int i=0;i<edges.length;i++){
-            Point point1=FindPoint(edges[i].getFrom());
-            Point point2=FindPoint(edges[i].getTo());
-            LatLng p1=new LatLng(point1.getLatitude(),point1.getLongitude());
-            LatLng p2=new LatLng(point2.getLatitude(),point2.getLongitude());
-            Distance = DistanceUtil.getDistance(p1, p2);
-//            Distance = AMapUtils.calculateLineDistance(new LatLng(point1.getLatitude(), point1.getLongitude()), new LatLng (point2.getLatitude(), point2.getLongitude()));
-            MyGraph.distance[i]=Distance;
-        }
-    }
+//    public void getEdgeDistance(){
+//        double Distance=0;
+//        for(int i=0;i<edges.length;i++){
+//            Point point1=FindPoint(edges[i].getFrom());
+//            Point point2=FindPoint(edges[i].getTo());
+//            LatLng p1=new LatLng(point1.getLatitude(),point1.getLongitude());
+//            LatLng p2=new LatLng(point2.getLatitude(),point2.getLongitude());
+//            Distance = DistanceUtil.getDistance(p1, p2);
+////            Distance = AMapUtils.calculateLineDistance(new LatLng(point1.getLatitude(), point1.getLongitude()), new LatLng (point2.getLatitude(), point2.getLongitude()));
+//            MyGraph.distance[i]=Distance;
+//        }
+//    }
 
     //根据index找坐标;
     public Point FindPoint(int index){
@@ -362,19 +371,21 @@ public class MyGraph{
 
     }
 
-    public Stack Set(){
+    public Stack Set(String startPoint, String endPoint){
         double Distance=0;
+        Log.d("length",edges.length+"");
         for(int i=0;i<edges.length;i++){
             Point point1=FindPoint(edges[i].getFrom());
             Point point2=FindPoint(edges[i].getTo());
             LatLng p1=new LatLng(point1.getLatitude(),point1.getLongitude());
             LatLng p2=new LatLng(point2.getLatitude(),point2.getLongitude());
-            Distance = DistanceUtil.getDistance(p1, p2);
+            distance[i]=  DistanceUtil.getDistance(p1, p2);
 //            Distance = AMapUtils.calculateLineDistance(new LatLng(point1.getLatitude(), point1.getLongitude()), new LatLng (point2.getLatitude(), point2.getLongitude()));
-            MyGraph.distance[i]=Distance;
+            Log.d("d", String.valueOf(distance[i]));
+            Log.d("text",edges[i].getFrom()+"");
         }
         Graph gs = new Graph(points,edges,distance);
-        Stack<Point> stack= gs.shortestPath_DIJ("主楼", "四号楼");
+        Stack<Point> stack= gs.shortestPath_DIJ(startPoint, endPoint);
 //        while (!stack.isEmpty()){
 ////            Point point=stack.pop();
 ////            Log.d("stack",point.name);
